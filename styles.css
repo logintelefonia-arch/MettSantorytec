@@ -1,0 +1,691 @@
+:root {
+  color-scheme: light;
+  --bg: #edf7f8;
+  --panel: #ffffff;
+  --text: #17324d;
+  --muted: #61798c;
+  --line: #cfe3ea;
+  --primary: #0f8f91;
+  --primary-dark: #08777a;
+  --accent: #237fa6;
+  --danger: #b42318;
+  --soft: #f8fcfd;
+  --soft-blue: #eaf7f8;
+  --clinic-mint: #dff6f4;
+  --shadow: 0 14px 34px rgba(23, 50, 77, 0.07);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    linear-gradient(180deg, #f9feff 0%, #f2fafb 260px, var(--bg) 100%),
+    var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px clamp(16px, 4vw, 48px);
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 8px 22px rgba(35, 127, 166, 0.07);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  margin-top: 4px;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.12;
+  color: #0b2447;
+}
+
+h2 {
+  margin-top: 3px;
+  font-size: 20px;
+  color: #0b2447;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.brandBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brandLogo {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.payerField {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  border: 1px solid #b6dde4;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #12395c;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 8px 7px 14px;
+  box-shadow: 0 8px 18px rgba(23, 50, 77, 0.06);
+}
+
+.payerField span {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.payerField select {
+  min-width: 220px;
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--soft-blue);
+  color: var(--text);
+  font-weight: 700;
+  padding: 0 34px 0 10px;
+  cursor: pointer;
+}
+
+.payerField select:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(15, 143, 145, 0.15);
+}
+
+.backupAlert {
+  color: #b42318;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 10px 14px;
+  border: 2px solid #b42318;
+  border-radius: 6px;
+  background: #ffe7e3;
+  box-shadow: 0 0 0 4px rgba(180, 35, 24, 0.12);
+  letter-spacing: 0;
+  animation: blinkAttention 0.85s steps(2, start) infinite;
+}
+
+@keyframes blinkAttention {
+  50% {
+    opacity: 0.35;
+    transform: scale(1.04);
+  }
+}
+
+button,
+.fileButton {
+  min-height: 40px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--primary);
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 10px 14px;
+}
+
+button:hover,
+.fileButton:hover {
+  background: var(--primary-dark);
+}
+
+.fileButton input {
+  display: none;
+}
+
+main {
+  display: grid;
+  gap: 16px;
+  max-width: 100vw;
+  padding: 24px clamp(16px, 4vw, 48px) 44px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+}
+
+.grid.single {
+  grid-template-columns: 1fr;
+}
+
+.panel {
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.payerPanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-color: #b9dee4;
+  background:
+    linear-gradient(90deg, #ffffff 0%, #f7fcfd 52%, #eefafa 100%);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.searchPanel .sectionHeader {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.searchPanel .count {
+  justify-self: center;
+}
+
+.count {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.searchInput {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fbfdfe;
+  padding: 0 14px;
+  margin-bottom: 14px;
+}
+
+.savedSheetsSearch {
+  margin-bottom: 10px;
+}
+
+.searchInput:focus,
+input:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(15, 143, 145, 0.15);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.formGrid label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.formGrid input {
+  min-width: 0;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fbfdfe;
+  color: var(--text);
+  padding: 0 10px;
+}
+
+.formGrid select {
+  min-width: 0;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fbfdfe;
+  color: var(--text);
+  padding: 0 10px;
+}
+
+.formGrid textarea {
+  min-height: 180px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  padding: 10px;
+}
+
+.formGrid textarea:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(15, 143, 145, 0.15);
+}
+
+.wideField {
+  grid-column: 1 / -1;
+}
+
+.formGrid button {
+  align-self: end;
+}
+
+.pasteBox {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.pasteBox label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pasteBox textarea {
+  min-height: 96px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  padding: 10px;
+}
+
+.pasteBox textarea:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(15, 143, 145, 0.15);
+}
+
+.pasteBox button {
+  justify-self: start;
+}
+
+.pasteOnly {
+  display: grid;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pasteOnly label {
+  display: grid;
+  gap: 6px;
+}
+
+.referenceField {
+  max-width: 320px;
+}
+
+.referenceField select {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fbfdfe;
+  color: var(--text);
+  padding: 0 10px;
+}
+
+.pasteOnly textarea {
+  min-height: 180px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fbfdfe;
+  color: var(--text);
+  font: inherit;
+  padding: 10px;
+}
+
+.pasteOnly textarea:focus {
+  border-color: var(--primary);
+  outline: 3px solid rgba(15, 143, 145, 0.15);
+}
+
+.pasteActions,
+.dialogActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.secondaryButton {
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--text);
+}
+
+.secondaryButton:hover {
+  border-color: var(--primary);
+  background: #ffffff;
+  color: var(--primary-dark);
+}
+
+#protocolForm {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+}
+
+.tableWrap {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.compact {
+  max-height: 420px;
+}
+
+.savedSheetsWrap {
+  overflow: auto;
+}
+
+.smallTable table {
+  table-layout: fixed;
+}
+
+.smallTable th,
+.smallTable td {
+  white-space: normal;
+  word-break: break-word;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 0;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  padding: 11px 12px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--soft-blue);
+  color: #12395c;
+  font-size: 13px;
+}
+
+td {
+  background: #ffffff;
+  font-size: 14px;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+.rowActions {
+  display: flex;
+  gap: 8px;
+}
+
+.rowActions button {
+  min-height: 32px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--text);
+  padding: 6px 9px;
+}
+
+.rowActions button:hover {
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+.rowActions .delete {
+  color: var(--danger);
+}
+
+.actionCell {
+  width: 92px;
+  min-width: 92px;
+  text-align: center;
+}
+
+.actionCell .rowActions {
+  justify-content: center;
+}
+
+.patientRecord > td {
+  border-bottom: 0;
+}
+
+.patientSpacer td {
+  height: 12px;
+  padding: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+}
+
+.savedSheetsEmpty {
+  padding: 18px;
+}
+
+.notesCell {
+  min-width: 0;
+  max-width: 100%;
+  padding: 0;
+}
+
+.miniSheetWrap {
+  max-height: 260px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.miniSheet {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+.miniSheet th,
+.miniSheet td {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 7px 8px;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.miniSheet th {
+  background: var(--soft-blue);
+  color: #12395c;
+  font-weight: 700;
+}
+
+.miniSheet td {
+  background: #ffffff;
+}
+
+.miniSheet tr:last-child td {
+  border-bottom: 0;
+}
+
+.combinedCell {
+  padding: 0;
+}
+
+.combinedSheetWrap {
+  max-width: 100%;
+  overflow: visible;
+}
+
+.combinedSheet {
+  width: max-content;
+  min-width: 100%;
+}
+
+.combinedSheet thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.sheetSpacer td {
+  height: 12px;
+  padding: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.patientNameSpacer td {
+  height: 10px;
+  padding: 0;
+  background: #f1f9fa;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.sheetAction {
+  width: 92px;
+  min-width: 92px;
+  text-align: center;
+}
+
+.referenceTitle td {
+  background: var(--clinic-mint);
+  color: #064653;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 12px 14px;
+  text-align: left;
+  text-transform: uppercase;
+  border-top: 2px solid #5bbdc8;
+  border-bottom: 2px solid #5bbdc8;
+}
+
+.detailsDialog {
+  width: min(520px, calc(100vw - 32px));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 0;
+}
+
+.detailsDialog::backdrop {
+  background: rgba(31, 41, 51, 0.35);
+}
+
+.detailsDialog form {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.detailsDialog label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.detailsDialog input {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 0 10px;
+}
+
+@media (max-width: 980px) {
+  .topbar,
+  .payerPanel,
+  .grid,
+  #protocolForm {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    display: grid;
+  }
+
+  .payerPanel {
+    display: grid;
+  }
+}
+
+@media (max-width: 640px) {
+  .brandLogo {
+    width: 66px;
+    height: 66px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 14px;
+  }
+
+  .payerField {
+    display: grid;
+  }
+
+  .payerField select {
+    min-width: 0;
+    width: 100%;
+  }
+}
