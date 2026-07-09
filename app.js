@@ -91,6 +91,7 @@ function loadState() {
 }
 
 function saveState() {
+  sortAllPayers();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
@@ -109,10 +110,10 @@ function buildPayers(savedPayers = {}) {
 }
 
 function normalizePayerData(data) {
-  return {
+  return sortPayerData({
     registrations: Array.isArray(data?.registrations) ? data.registrations : [],
     protocols: Array.isArray(data?.protocols) ? data.protocols : [],
-  };
+  });
 }
 
 function payerExists(payerId) {
@@ -196,6 +197,7 @@ function escapeHtml(value) {
 }
 
 function render() {
+  sortAllPayers();
   renderPayerUi();
   renderRegistrations();
   renderProtocols();
@@ -425,19 +427,63 @@ function groupRecordsByReference(records) {
 }
 
 function compareReference(left, right) {
-  const leftNumber = referenceNumber(left);
-  const rightNumber = referenceNumber(right);
+  const leftDate = referenceSortValue(left);
+  const rightDate = referenceSortValue(right);
 
-  if (leftNumber !== rightNumber) {
-    return leftNumber - rightNumber;
+  if (leftDate !== rightDate) {
+    return leftDate - rightDate;
   }
 
   return normalizeText(left).localeCompare(normalizeText(right), "pt-BR");
 }
 
-function referenceNumber(value) {
-  const match = String(value).match(/\d+/);
-  return match ? Number(match[0]) : Number.MAX_SAFE_INTEGER;
+function referenceSortValue(value) {
+  const text = String(value || "");
+  const monthYear = text.match(/(?:mes|m[eê]s)?\s*(0?[1-9]|1[0-2])\s*[-/]\s*(20\d{2}|\d{2})/i);
+  if (monthYear) {
+    return makeMonthSortValue(monthYear[2], monthYear[1]);
+  }
+
+  const yearMonth = text.match(/\b(20\d{2})\s*[-/]\s*(0?[1-9]|1[0-2])\b/);
+  if (yearMonth) {
+    return makeMonthSortValue(yearMonth[1], yearMonth[2]);
+  }
+
+  const firstNumber = text.match(/\d+/);
+  return firstNumber ? Number(firstNumber[0]) : Number.MAX_SAFE_INTEGER;
+}
+
+function makeMonthSortValue(year, month) {
+  const fullYear = String(year).length === 2 ? Number(`20${year}`) : Number(year);
+  return fullYear * 100 + Number(month);
+}
+
+function compareRecordOrder(left, right) {
+  const referenceOrder = compareReference(left.reference || "", right.reference || "");
+  if (referenceOrder !== 0) return referenceOrder;
+
+  const beneficiaryOrder = normalizeText(left.beneficiary || "").localeCompare(
+    normalizeText(right.beneficiary || ""),
+    "pt-BR",
+  );
+  if (beneficiaryOrder !== 0) return beneficiaryOrder;
+
+  const protocolOrder = String(left.protocol || "").localeCompare(String(right.protocol || ""), "pt-BR", {
+    numeric: true,
+  });
+  if (protocolOrder !== 0) return protocolOrder;
+
+  return String(left.id || "").localeCompare(String(right.id || ""), "pt-BR");
+}
+
+function sortPayerData(data) {
+  data.registrations.sort(compareRecordOrder);
+  data.protocols.sort(compareRecordOrder);
+  return data;
+}
+
+function sortAllPayers() {
+  Object.values(state.payers).forEach(sortPayerData);
 }
 
 function parseNotesTable(notes) {
